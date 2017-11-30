@@ -1,0 +1,12 @@
+{
+	"type":"record",
+	"namespace":"id.co.danamon.schema",
+	"name":"AlertNotification",
+	"fields":
+		[
+			{"name":"source", "type":["null", "string"]},
+			{"name":"message", "type":["null", "string"]},
+            {"name":"severity", "type":["null", "string"]},
+			{"name":"timestamp", "type":["null", "string"]}
+		]
+}
