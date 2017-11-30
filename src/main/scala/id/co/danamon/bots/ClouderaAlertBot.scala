@@ -8,9 +8,7 @@ import org.telegram.telegrambots.{ApiContextInitializer, TelegramBotsApi}
 /**
   * Created by welly on 11/29/2017.
   */
-class ClouderaAlertBot {
-
-  ApiContextInitializer.init()
+object ClouderaAlertBot {
 
   val botsApi = new TelegramBotsApi()
   val bot = new ClouderaNotifierBot()

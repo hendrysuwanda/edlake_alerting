@@ -8,6 +8,7 @@ import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.kafka010.{KafkaUtils, _}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.telegram.telegrambots.ApiContextInitializer
 
 /**
  * @author ${user.name}
@@ -17,6 +18,8 @@ object App {
 
   def main(args : Array[String]) {
     PropertyHandler.loadProperties()
+
+    ApiContextInitializer.init()
 
     val spark = SparkSession.builder.master("local[2]").appName("Campaign App").getOrCreate()
     val sc  = spark.sparkContext
@@ -32,11 +35,11 @@ object App {
 
       rdd.foreachPartition(records => {
 
-        val alertBot = new ClouderaAlertBot()
+//        val alertBot = new ClouderaAlertBot()
 
         records
           .map(x => KafkaSerializer.convertToObject(x.value()))
-          .foreach(alertBot.send)
+          .foreach(ClouderaAlertBot.send)
 
       })
 
