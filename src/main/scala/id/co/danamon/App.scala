@@ -25,7 +25,7 @@ object App {
     val sc  = spark.sparkContext
     val streamingContext = new StreamingContext(sc, Seconds(2))
 
-    val topic = "notifier"
+    val topic = "AlertNotification"
 
     val stream = KafkaUtils.createDirectStream[String, Array[Byte]](streamingContext, PreferConsistent, Subscribe[String, Array[Byte]](Array(topic), InternalKafkaUtils.getKafkaParams()))
 
@@ -34,8 +34,6 @@ object App {
       logger.info("Reading current offset Range..." + offsetRanges.mkString)
 
       rdd.foreachPartition(records => {
-
-//        val alertBot = new ClouderaAlertBot()
 
         records
           .map(x => KafkaSerializer.convertToObject(x.value()))

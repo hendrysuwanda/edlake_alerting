@@ -41,7 +41,7 @@ class AppTest {
       out.close()
       val serializedBytes: Array[Byte] = out.toByteArray()
 
-      producer.send(new ProducerRecord[String, Array[Byte]]("notifier", serializedBytes))
+      producer.send(new ProducerRecord[String, Array[Byte]]("AlertNotification", serializedBytes))
     }
 
 //    @Test
